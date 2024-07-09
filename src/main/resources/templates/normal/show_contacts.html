@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>This is show contacts page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+    	  $(".del_btn").click(function (event){
+    		  if(!confirm("Are you sure you want to delete")){
+    			  event.preventDefault();
+    		  }
+    	  });
+      });
+    </script>
+  </head>
+  <body>
+    <section>
+         <div class="card" style="margin-right : 20px; margin-left : 20px;">
+			<div class="card-body">
+			<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert- text-center" role="alert"><span class="text-success" th:text="${session.message.content}"></span></div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">#ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Phone</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="c : ${contacts}">
+							<th scope="row" th:text="${'SCM'+c.cId}">1</th>
+							<td>
+							<img alt="profile photo" src="" th:src="@{'/img/' + ${c.image}}" class="profile-pic">
+							<span th:text="${c.name}"></span></td>
+							<td><a href="#" th:href="@{'/user/contact-detail/' + ${c.cId}}"><span th:text="${c.email}"></span></a></td>
+							<td th:text="${c.phone}"></td>
+							<td><a href="#" th:href="@{'/user/delete-contact/' + ${c.cId}}" class="btn btn-outline-dark">Delete</a>  <a href="#" th:href="@{'/user/update-contact/' + ${c.cId}}" type="submit" class="btn btn-outline-dark">Update</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li th:if="${currentPage != 0}" class="page-item"><a class="page-link" href="#" th:href="@{'/user/show-contacts/' + ${currentPage-1}}">Previous</a></li>
+						<li th:classappend="${currentPage==i-1?'active':''}"  th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link" href="#" th:href="@{'/user/show-contacts/'+${i-1}}"><span th:text="${i}"></span></a></li>
+						<li th:if="${currentPage + 1 != totalPages}" class="page-item"><a class="page-link" href="#" th:href="@{'/user/show-contacts/' + ${currentPage+1}}">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</section>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

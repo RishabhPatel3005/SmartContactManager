@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>This is add contact page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <section>
+		<div class="card" style="margin-left: 20px; margin-right: 20px;">
+			<div class="card-body">
+				<h1 class="text-center">Update Contact</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-10 offset-md-1">
+							<form action="#" th:object="${contact}"
+								enctype="multipart/form-data" method="post"
+								th:action="@{/user/process-update}" class="mt-2">
+								<input type="hidden" th:value="${contact.cId}" name="cId">
+								<div class="input-group">
+									<span class="input-group-text"> <i
+										class="fa-solid fa-plus"></i>
+									</span> <input th:value="${contact.name}" required type="text" id="firstName" name="name"
+										placeholder="Enter Name Here" class="form-control" />
+								</div>
+								<div class="input-group mt-3">
+									<span class="input-group-text"> <i
+										class="fa-solid fa-user-plus"></i>
+									</span> <input th:value="${contact.nickname}" type="text" id="nickName" name="nickname"
+										placeholder="Enter Nickname Here" class="form-control" />
+								</div>
+								<div class="input-group mt-3">
+									<span class="input-group-text"> <i
+										class="fa-solid fa-briefcase"></i>
+									</span> <input th:value="${contact.work}" required type="text" id="work" name="work"
+										placeholder="Enter Work Title Here" class="form-control" />
+								</div>
+								<div class="input-group mt-3">
+									<span class="input-group-text"> <i
+										class="fa-solid fa-envelope"></i>
+									</span> <input th:value="${contact.email}" required type="email" id="email" name="email"
+										placeholder="Enter Email Here" class="form-control" />
+								</div>
+								<div class="input-group mt-3">
+									<span class="input-group-text"> <i
+										class="fa-solid fa-phone"></i>
+									</span> <input th:value="${contact.phone}" required type="number" id="phone" name="phone"
+										placeholder="Enter Phone Number Here" class="form-control" />
+								</div>
+								<div class="form-group mt-3">
+									<textarea th:text="${contact.description}" id="default-editor">
+                                      <p>This text box is just representation. To use it we have to buy the tiny mce premium version</p></textarea>
+								</div>
+								<div class="container text-center mt-3">
+								    <img style="width: 250px; height: 250px;" class="img-fluid profile-image-pic" src="" th:src="@{'/img/'+${contact.image}}" alt=""/>
+								</div>
+								<div class="custom-file mt-3">
+									<input type="file" name="profileImage" />
+								</div>
+								<div class="container text-center">
+									<button class="btn btn-outline-success">Update Contact</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+		<script>
+			tinymce.init({
+				selector : 'textarea#default-editor'
+			});
+		</script>
+	</section>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
