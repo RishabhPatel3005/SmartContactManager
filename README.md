@@ -23,6 +23,9 @@ List the main technologies, frameworks, and libraries used in your project:
 - Spring Security
 - HTML/CSS
 - Bootstrap
+- Maven
+- SpringBoot Starter
+- SpringBoot Dev Tools
   
 
 
